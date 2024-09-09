@@ -1,6 +1,12 @@
 # Prerequisites
 *.d
 
+# Ignore all executables starting with 'exercise'
+exercise*
+
+# Ensure all .c files are tracked
+!*.c
+
 # Object files
 *.o
 *.ko
