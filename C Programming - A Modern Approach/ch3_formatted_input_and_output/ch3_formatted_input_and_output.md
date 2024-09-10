@@ -1,10 +1,10 @@
-# Ch.3 Formatted Input/Output
+# **Chapter 3**: Formatted Input/Output
 
 - 3.1 is about printf
 - 3.2 is about scanf
 - Complete details for each function is expanded upon in chapter 22
 
-## 3.1 The printf Function
+## **3.1**: The printf Function
 
 - `printf` displays a string, the **format string**
 - `printf` is constructed as follows:
@@ -91,6 +91,8 @@ int main(void)
     - Horizontal tab    `\t`
         - moves cursor to the next tab stop
     - " Character       `\"`
+        - Displays a singular double quotes character
+    - Backslack Chatacter
 
 ```c 
 printf("Item\tUnit\tPurchase\n\tPrice\tDate\n");
@@ -101,4 +103,84 @@ printf("Item\tUnit\tPurchase\n\tPrice\tDate\n");
 ```bash 
 Item    Unit    Purchase
         Price   Date
+```
+
+## **3.2**: The `scanf Function
+
+- `scanf` reads input according to a particular format.
+- The `scanf` format string is essentially the same as `printf`'s format string.
+- `scanf` will read a line, convertings its characters to the data types they represent and then assign those values to variables. 
+
+```c
+int i, j;
+float x, y;
+
+scanf("%d%d%f%f", &i, &j, &x, &y);
+```
+> Suppose the user enters the following input line: 
+```bash 
+1 -20 .3 -4.0e3
+```
+Then the numbers will be assigned to the following variables:
+
+| Number   | Variable |
+|----------|----------|
+| $1$      | *i*      |
+| $-20$    | *j*      |
+| $0.3$    | *x*      |
+| $-4.0e3$ | *y*      |
+
+### How `scanf` Works 
+
+- `scanf` is basically a "pattern-matching" function that tries match **groups of input characters** with **conversion specifications**
+
+> When `scanf` is called:
+> 1. Begins processing information of string, starting from the left 
+> 2. 
+1. Begins processing information of string, starting from the left 
+2. For each conversion specification in the format string, attempts to locate an item of the appropriate type in the input data
+    - It will skip blank space if necessary
+3. 'scanf' reads the item, stopping when it encounters a character that can't possible belong to the item. 
+4. If read **successfully**, `scanf` returns immediately without looking at the rest of the format string, or remaining input data. 
+
+
+### Ordinary Characters in Format Strings
+
+- ***White-space characters***: 
+    - A white-space character in a format string matches *any* number of white-space characters in the input, including none
+- ***Other characters***: 
+    - When `scanf` encounters a non-white-space character in a format string, it is compared with the next input character
+
+### PROGRAM: Adding Fractions 
+
+```c 
+/* Filename: addfrac.c 
+   Purpose: Adds two fractions */
+
+#include <stdio.h>
+
+int main(void) 
+{
+    int num1, denom1, num2, denom2, result_num, result_denom;
+
+    printf("Enter first fraction: ");
+    scanf("%d/%d", &num1, &denom1);
+
+    printf("Enter second fraction: ");
+    scanf("%d/%d", &num2, &denom2);
+
+    result_num = num1 * denom2 + num2 * denom1;
+    result_denom = denom1 * denom2;
+    printf("The sum is %d/%d\n", result_num, result_denom);
+
+    return 0;
+}
+```
+
+> Example interaction with program:
+
+```bash
+Enter first fraction: 5/6
+Enter second fraction: 3/4
+The sum is 38/24
 ```
